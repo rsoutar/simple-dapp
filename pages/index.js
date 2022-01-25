@@ -3,9 +3,11 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { ethers } from 'ethers'
 import styles from '../styles/Home.module.css'
+// After run `npx hardhat compile` you will get an ABI file in the `artifacts` folder.
 import Greeter from '../artifacts/contracts/Greeter.sol/Greeter.json'
 import Token from '../artifacts/contracts/Token.sol/Token.json'
 
+// After run `npx hardhat run script/deploy.js --network localhost`
 const greeterAddress = "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0"
 const tokenAddress = "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82"
 
@@ -14,6 +16,7 @@ export default function Home() {
   const [userAccount, setUserAccount] = useState('')
   const [amount, setAmount] = useState(0)
 
+  // ERC20 Contract
   async function requestAccount() {
     await window.ethereum.request({method: 'eth_requestAccounts' });
   }
@@ -40,6 +43,7 @@ export default function Home() {
     }
   }
 
+  // Greeting Contract
   async function fetchGreeting() {
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
